@@ -2,7 +2,7 @@
 FROM node:alpine
 
 # Create app directory
-WORKDIR /express-repo
+WORKDIR /
 
 # Copy package.json and package-lock.json
 COPY ./express-repo/package*.json .
