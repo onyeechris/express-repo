@@ -2,16 +2,17 @@
 FROM node:alpine
 
 # Create app directory
-WORKDIR /
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app 
 
 # Copy package.json and package-lock.json
-COPY ./express-repo/package*.json .
+COPY package*.json ./
 
 # Install app dependencies
 RUN npm install
 
 # Copy the rest of the application
-COPY ./express-repo/* .
+COPY * ./
 
 # Expose port 3000
 EXPOSE 3000
