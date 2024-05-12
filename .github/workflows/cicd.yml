@@ -24,7 +24,7 @@ jobs:
       with:
         build_context: ./app.js
         dockerfile_path: ./Dockerfile
-        #image: onyeechris/express_workflow
+        image: onyeechris/express_workflow
         #registry: docker.io
         #username: ${{ secrets.DOCKER_USERNAME }}
         #password: ${{ secrets.DOCKER_PASSWORD }}
