@@ -18,7 +18,7 @@ spec:
         app: myexpress
     spec:
       containers:
-      - image: onyeechris/express_workflow:latest
+      - image: onyeechris/express_workflow:main-99796ad
         name: myexpress
         ports:
         - containerPort: 3000
