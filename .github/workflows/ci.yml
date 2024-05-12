@@ -21,7 +21,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-   - name: build and push docker Image
+    - name: build and push docker Image
      uses: mr-smithers-excellent/docker-build-push@v6
      with:
        image: onyeechris/express_workflow
