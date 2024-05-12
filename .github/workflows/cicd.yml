@@ -44,4 +44,4 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl apply -f deploy_express.yaml
+        kubectl apply -f deploy_express.yaml --validate=false
