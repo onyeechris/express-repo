@@ -6,9 +6,12 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+        KUBECONFIG: ${{ secrets.KUBECONFIG }}
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: "self-hosted"
     
     steps:
     - uses: actions/checkout@v4
@@ -22,25 +25,18 @@ jobs:
     - name: Build Docker Image
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
+        push: false
         image: onyeechris/express_workflow
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: "self-hosted"
     needs: build
     steps:
     - uses: actions/checkout@v4
 
-    - name: Decode kubeconfig secret
-      run: echo "${{ secrets.KUBECONFIG }}" | base64 --decode > kubeconfig.yaml
-
-    - name: Set up kubectl
-      run: |
-        sudo apt-get update && sudo apt-get install -y kubectl
-        export KUBECONFIG=kubeconfig.yaml
-
     - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f deploy_express.yaml --validate=false
+      
+      run: kubectl apply -f deploy_express.yaml
