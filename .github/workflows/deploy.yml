@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-        KUBECONFIG: ${{ secrets.KUBECONFIG }}
+        KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
 
 jobs:
 
