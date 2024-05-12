@@ -34,10 +34,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Deploy to Kubernetes
-      env:
-        KUBECONFIG: ${{ secrets.KUBECONFIG }}
+    - name: Decode kubeconfig secret
+      run: echo "${{ secrets.KUBECONFIG }}" | base64 --decode > kubeconfig.yaml
+
+    - name: Set up kubectl
       run: |
-        echo "$KUBECONFIG" | base64 --decode > kubeconfig.yaml
+        sudo apt-get update && sudo apt-get install -y kubectl
         export KUBECONFIG=kubeconfig.yaml
+
+    - name: Deploy to Kubernetes
+      run: |
         kubectl apply -f deploy_express.yaml
