@@ -1,23 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: myexpress
+  name: myexpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myexpress
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
       labels:
         app: myexpress
     spec:
       containers:
-      - image: docker.io/onyeechris/express-new:1.0
-        name: sha256
+      - image: onyeechris/express_workflow:latest
+        name: myexpress
         ports:
         - containerPort: 3000
         resources: {}
 status: {}
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: myexpress
-spec:
-  selector:
-    app: myexpress
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 3000
